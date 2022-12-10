@@ -1,0 +1,186 @@
+/**
+ * ROFI Color theme
+ * User: Qball
+ * Copyright: Dave Davenport
+ */
+
+* {
+    foreground:  #ffeedd;
+    backlight:   #ccffeedd;
+    background-color:  transparent;
+    dark: #1c1c1c;
+    // Black
+    black:       #32323f;
+    lightblack:  #64647d;
+    tlightblack:  #554444cc;
+    //
+    // Red
+    red:         #cd5c5c;
+    lightred:    #cc5533;
+    //
+    // Green
+    green:       #86af80;
+    lightgreen:  #88cc22;
+    //
+    // Yellow
+    yellow:      #e8ae5b;
+    lightyellow:     #ffa75d;
+    //
+    // Blue
+    blue:      #6495ed;
+    lightblue:     #87ceeb;
+    //
+    // Magenta
+    magenta:      #deb887;
+    lightmagenta:     #996600;
+    //
+    // Cyan
+    cyan:      #b0c4de;
+    tcyan:      #ccb0c4de;
+    lightcyan:     #b0c4de;
+    //
+    // White
+    white:      #ffffff;
+    lightwhite:     #ffffff;
+    //
+    // Bold, Italic, Underline
+    highlight:     underline bold #ffffff;
+
+    transparent: rgba(0,0,0,0);
+    transparent2: rgba(50,50,63,1);
+    font: "Source Code Pro 10";
+}
+window {
+    location: center;
+    anchor:   center;
+    padding: 10px;
+    border:  0px;
+    border-radius: 10px;
+    transparency: "screenshot";
+    color: @white;
+    background-color: @transparent;
+    spacing: 0;
+    children:  [mainbox];
+    orientation: horizontal;
+}
+mainbox {
+    spacing: 0;
+    background-color: @transparent2;
+    border: 0px;
+    border-radius:  15px 15px 15px 15px;
+    children: [ inputbar, message, listview ];
+}
+message {
+    padding: 5;
+    background-color: @transparent;
+}
+message {
+    font: "Source Code Pro 8";
+    color: @transparent;
+}
+inputbar {
+    color: @white;
+    padding: 11px;
+    background-color: @black;
+    border: 0px;
+    border-radius:  15px 15px 0px 0px;
+    font: "Source Code Pro 18";
+}
+entry,prompt,case-indicator {
+    text-font: inherit;
+    text-color: @white;
+    background-color: transparent;
+}
+prompt {
+    margin:     0px 0.3em 0em 0em ;
+}
+listview {
+    padding: 8px;
+    border-radius: 0px 0px 15px 15px;
+    border: 0px;
+    background-color: @transparent;
+    dynamic: false;
+    lines: 10;
+    scrollbar: false;
+}
+
+#scrollbar {
+}
+
+element {
+    padding: 3px;
+    vertical-align: 0.5;
+    border-radius: 4px;
+    background-color: @transparent;
+    color: @transparent;
+    font:inherit;
+}
+element-text {
+    background-color: @transparent;
+    text-color: @white;
+}
+element selected.normal {
+    background-color: @lightblack;
+    text-color: @black;
+}
+element normal active {
+    text-font: inherit;
+    text-color: @black;
+}
+element normal urgent {
+    foreground: @lightred;
+}
+element alternate normal {
+	background-color: transparent;
+    text-font: inherit;
+    text-color: @black;
+}
+element alternate active {
+    foreground: @transparent;
+    text-color: @black;
+}
+element alternate urgent {
+    foreground: @transparent;
+}
+element selected active {
+    background-color: @black;
+    foreground: @dark;
+    text-color: @lightblack;
+}
+element selected urgent {
+    background-color: @lightblack;
+    foreground: @transparent;
+    text-color: @black;
+}
+element normal normal {
+    background-color: transparent;
+    text-font: inherit;
+    text-color: @black;
+}
+mode-switcher {
+    expand: false;
+    orientation: vertical;
+    spacing: 0px;
+    border: 0px 0px 0px 0px;
+}
+button {
+    font: "FontAwesome 22";
+    padding: 6px;
+    border: 0px;
+    border-radius: 4px 0px 0px 4px;
+    background-color: @transparent;
+    color: @transparent;
+    horizontal-align: 0.5;
+}
+button selected normal {
+    color: @dark;
+    border: 0px;
+    background-color: @transparent;
+    text-font: inherit;
+    text-color: @transparent;
+}
+error-message {
+    expand: true;
+    background-color: red;
+    padding: 1em;
+}

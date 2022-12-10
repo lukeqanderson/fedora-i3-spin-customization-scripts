@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# A script to do basic security measure on system startup.
+
+# Ensure firewalld is enabled and started
+systemctl enable firewalld
+systemctl start firewalld
+
+# Connect to cyberghost VPN
+if rpm -qa | grep -qi "cyberghostvpn"; then 
+	echo "VPN client found. Connecting to US region..."
+	echo ""
+	cyberghostvpn --country-code US --connect
+else 
+	echo "Could not find VPN client. For Cyberghost VPN, visit \"https://my.cyberghostvpn.com/en_US/login\" and download the CLI client for linux."
+	echo ""
+	echo "Run this script again after CLI is configured (Aborting)."
+	echo ""
+	exit 1
+fi
+

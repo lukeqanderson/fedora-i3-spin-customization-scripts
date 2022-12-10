@@ -1,0 +1,96 @@
+#!/bin/bash
+
+# Root script to install essential packages.
+
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Updating and upgrading DNF Repository...                                 #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+
+# Updates and upgrade repo
+dnf update -y && dnf upgrade -y
+
+# Installs the one true editor v2.
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installing vim...                                                        #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install -y vim 
+
+# Installs the one true editor v3.
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installing neovim...                                                     #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install -y neovim python3-neovim 
+
+# Installs Alacritty terminal emulator.
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installing alacritty terminal emulator with dependencies...              #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install -y cmake freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel g++
+dnf group install -y "Development Tools"
+dnf install -y alacritty
+
+# Installs polybar Status bar.
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installing polybar Status Bar...                                         #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install -y  polybar
+
+# Installs Rofi window switcher.
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installing Rofi...                                                       #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install -y rofi
+
+# Installs picom and depencendies.
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installing picom with dependencies...                                    #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install -y dbus-devel gcc git libconfig-devel libdrm-devel 
+dnf install -y libev-devel libX11-devel libX11-xcb libXext-devel
+dnf install -y libxcb-devel libGL-devel libEGL-devel meson
+dnf install -y pcre2-devel pixman-devel uthash-devel 
+dnf install -y xcb-util-image-devel xcb-util-renderutil-devel xorg-x11-proto-devel
+dnf install -y xcb-util-render-devel
+python3 -m pip install asciidoc
+
+echo "Making directory for cloned git repos..."
+mkdir /home/cookinduck/git
+(cd /home/cookinduck/git; git clone https://github.com/yshui/picom; cd /home/cookinduck/git/picom; git submodule update --init --recursive; meson setup --buildtype=release . build; ninja -C build; ninja -C build install)
+
+# Installs inxi.
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installing inxi...                                                       #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install -y inxi

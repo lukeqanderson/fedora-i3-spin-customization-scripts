@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# script to add picom startup to i3 config
+
+i3File=/home/cookinduck/.config/i3/config
+if grep -q picom $i3File ;then
+	echo ""
+	echo "Found picom startup script in \"$i3File\" (Aborting)."
+	echo ""
+else 
+	echo ""
+	echo "Adding picom startup script to i3 config..."
+	echo ""
+	echo "" >> $i3File 
+	echo "exec_always --no-startup-id picom -b" >> $i3File
+fi
+
+configPath=/home/cookinduck/.config/
+if ls -ltr $configPath | grep -q "picom" ;then 
+	echo "picom config directory found. Check config file in \"$configPath\" for more details (Aborting)."
+	echo ""
+else 
+	mkdir $configPath/picom
+	echo "picom config directory created."
+	echo ""
+	cp /usr/local/bin/configs/picom/picom.conf $configPath/picom/
+	echo "picom config file added."
+	echo ""
+fi
+
+
+

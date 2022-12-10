@@ -1,0 +1,148 @@
+#!/bin/bash
+
+# Does a full configuraiton of the entire system from initial install.
+
+# Establishes wifi connection if no internet access is detected
+echo ""
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    CHECKING NETWORK CONNECTIVITY                                            #"
+echo "#                                                                             #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+
+wget -q --spider https://redhat.com
+
+if [ $? -eq 0 ]; then 
+
+	echo ""
+	echo "###############################################################################"
+	echo "#                                                                             #"
+	echo "#    NETWORK IS CONNECTED! Continuing install,,,                              #"
+	echo "#                                                                             #"
+	echo "#                                                                             #"
+	echo "###############################################################################"
+	echo ""
+else
+	echo ""
+	echo "###############################################################################"
+	echo "#                                                                             #"
+	echo "#    NETWORK IS DISCONNECTED! Attempting to connect to WIFI,,,                #"
+	echo "#    Executing: /usr/local/sbin/wificonnect                                   #"
+	echo "#                                                                             #"
+	echo "#                                                                             #"
+	echo "###############################################################################"
+	echo ""
+	wificonnect
+fi
+
+
+# Installs all essential packages.
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    INSTALLING ESSENTIAL PACKAGES                                            #"
+echo "#                                                                             #"
+echo "#    Executing: /usr/local/sbin/installessentials                             #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+installessentials
+
+# Increases GRUB timeout.
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    REMOVING GRUB TIMEOUT                                                    #"
+echo "#                                                                             #"
+echo "#    Executing: /usr/local/sbin/removegrubtime                                #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo "" removegrubtime
+
+# Adjusting Key Bindings.
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    CONFIGURING KEY BINDINGS                                                 #"
+echo "#                                                                             #"
+echo "#    Executing: /usr/local/bin/vimkeybindings on                              #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+addi3config
+vimkeybindings on
+customterminal on
+rebindwindowquit on
+
+# Configure polybar.
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    CONFIGURING POLYBAR                                                      #"
+echo "#                                                                             #"
+echo "#    Executing: /usr/local/bin/configurepolybar                               #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+configurepolybar
+
+# Configure rofi.
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    CONFIGURING ROFI                                                         #"
+echo "#                                                                             #"
+echo "#    Executing: /usr/local/bin/configurerofi                                  #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+configurerofi on
+
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    SETTING A SEASONAL WALLPAPER                                             #"
+echo "#                                                                             #"
+echo "#    Executing: /usr/local/bin/seasonalwallpaper                              #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+seasonalwallpaper
+
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    REMOVING TITLE BARS FROM i3 WINDOWS                                      #"
+echo "#                                                                             #"
+echo "#    Executing: /usr/local/bin/removetitlebars                                #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+removetitlebars
+
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    SECURING THE SYSTEM                                                      #"
+echo "#    Executing: /usr/local/bin/securebox                                      #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+securebox
+
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    FULL CONFIGURATION COMPLETE                                              #"
+echo "#                                                                             #"
+echo "#                          ______                                             #"
+echo "#    WECLOME HOME!        /______\                                            #"
+echo "#                         |[]  []|                                            #"
+echo "#                         |  []  |                                            #"
+echo "#                         ^^^^^^^^                                            #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""

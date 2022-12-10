@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# bash script to toggle default / custom terminal for i3.
+
+customTerminal=$1
+file=/home/cookinduck/.config/i3/config
+
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    STARTING CUSTOM/DEFAULT TERMINAL SWITCHER                                #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+
+# checks whether user added config is added to i3
+addi3config
+
+if [ "$customTerminal" = "on" ]; then 
+	# checks for if a custom terminal is already set.
+	if grep -q "#bindsym \$mod+Return exec i3-sensible-terminal" "$file"; then
+		echo ""
+		echo "Custom terminal already set, check \"$file\" for errors (Aborting)."
+		echo ""
+	else 
+		echo ""
+		echo "Switching configuration to custom terminal outlined in \"$file\"..."
+		# uncomments out the custom terminal and comments the default terminal 
+		sed -i '211s/^#//' "$file"
+		sed -i '48s/^/#/' "$file"
+		echo ""
+		echo "Checking for config file..."
+		echo ""
+		if ls -ltr /home/cookinduck/.config | grep -q "alacritty" ;then
+			echo "Configuration file found."
+			echo ""
+		else 
+			echo "Configuration file not found. Creating configuration file..."
+			echo ""
+			mkdir /home/cookinduck/.config/alacritty
+			cp /usr/local/bin/configs/alacritty/alacritty.yml /home/cookinduck/.config/alacritty/
+		fi
+		echo "I3 terminal switched to custom."
+		echo ""
+	       	echo "Press \"\$mod+Shift+r\" to restart i3."
+		echo ""
+	fi
+elif [ "$customTerminal" = "off" ]; then 
+	# checks for if a custom terminal is already set.
+	if grep -q "#bindsym \$mod+Return exec i3-sensible-terminal" "$file"; then
+		echo ""
+		echo "Switching configuration to default terminal (i3-sensible-terminal)..."
+		# uncomments out the default terminal and comments the custom terminal 
+		sed -i '48s/^#//' "$file"
+		sed -i '211s/^/#/' "$file"
+		echo ""
+		echo "I3 terminal switched to default (i3-sensible-terminal)."
+		echo ""
+	       	echo "Press \"\$mod+Shift+r\" to restart i3."
+		echo ""
+	else 
+		echo ""
+		echo "Default terminal (i3-sensible-terminal) already set, check \"$file\" for errors (Aborting)."
+		echo ""
+	fi
+else
+	echo ""
+	echo "ERROR: Invalid parameter passed. This script accepts \"on\" or \"off\" as valid parameters."
+	echo ""
+fi
+
+
+

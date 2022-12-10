@@ -1,0 +1,77 @@
+#!/bin/bash
+
+# Script to force update of seasonal wallpaper based on season.
+
+addi3config
+
+# Checks for existing seasonal wallpaper directories
+imagesDir=/home/cookinduck/Pictures
+if ls -ltr $imagesDir | grep -q "winterWallpaper"; then
+	echo ""
+	echo "Wallpaper directories found. Changing to seasonal wallpaper..."	
+	echo ""
+else
+	echo ""
+	echo "No wallpaper directories found. Creating seasonal directories."
+	echo ""
+	mkdir $imagesDir/winterWallpaper
+	mkdir $imagesDir/autumnWallpaper
+	mkdir $imagesDir/summerWallpaper
+	mkdir $imagesDir/springWallpaper
+fi 
+
+winterCount=$(ls -ltr ${imagesDir}/winterWallpaper | wc -l)
+autumnCount=$(ls -ltr ${imagesDir}/autumnWallpaper | wc -l)
+summerCount=$(ls -ltr ${imagesDir}/summerWallpaper | wc -l)
+springCount=$(ls -ltr ${imagesDir}/springWallpaper | wc -l)
+
+# Checks for correct number of images in each file
+if (( winterCount < 2 )); then 
+	echo "No winter wallpaper image found, downloading generic image..."
+	echo ""
+	wget https://i.imgur.com/nZBJAsK.jpg -P $imagesDir/winterWallpaper
+elif (( winterCount > 2 )); then  
+	echo "More that one image found in \"${imagesDir}/winterWallpaper\". Please ensure no more that one image is inside each seasonal directory (Aborting)."
+	echo ""
+	exit 1
+fi
+if (( autumnCount < 2 )); then 
+	echo "No autumn wallpaper image found, downloading generic image..."
+	echo ""
+	wget https://i.imgur.com/Z6kdWmA.jpg -P $imagesDir/autumnWallpaper
+elif (( autumnCount > 2 )); then  
+	echo "More that one image found in \"${imagesDir}/autumnWallpaper\". Please ensure no more that one image is inside each seasonal directory (Aborting)."
+	echo ""
+	exit 1
+fi
+if (( summerCount < 2 )); then 
+	echo "No summer wallpaper image found, downloading generic image..."
+	echo ""
+	wget https://i.imgur.com/wvunc.jpg -P $imagesDir/summerWallpaper
+elif (( summerCount > 2 )); then  
+	echo "More that one image found in \"${imagesDir}/summerWallpaper\". Please ensure no more that one image is inside each seasonal directory (Aborting)."
+	echo ""
+exit 1
+fi
+if (( springCount < 2 )); then 
+	echo "No spring wallpaper image found, downloading generic image..."
+	echo ""
+	wget https://i.imgur.com/XBkMx5B.jpg -P $imagesDir/springWallpaper
+elif (( springCount > 2 )); then  
+	echo "More that one image found in \"${imagesDir}/springWallpaper\". Please ensure no more that one image is inside each seasonal directory (Aborting)."
+	echo ""
+	exit 1
+fi
+
+doy=$(date +%j)
+if (( doy >= 355 )); then
+	feh --bg-scale $imagesDir/winterWallpaper/*
+elif (( doy >= 265 )); then
+	feh --bg-scale $imagesDir/autumnWallpaper/*	
+elif (( doy >= 171 )); then
+	feh --bg-scale $imagesDir/summerWallpaper/*
+elif (( doy >= 79 )); then
+	feh --bg-scale $imagesDir/springWallpaper/*
+else 
+	feh --bg-scale $imagesDir/winterWallpaper/*
+fi

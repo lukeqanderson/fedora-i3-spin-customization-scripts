@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# bash script to remove title bars
+
+i3File=/home/cookinduck/.config/i3/config
+if grep -q "new_window" $i3File ;then 
+	echo ""
+	echo "Found \"new_window\" setting in \"$i3File\". Set to 1pixel to remove title bars (Aborting)."
+	echo ""
+else
+	echo "" >> $i3File
+	echo "new_window 1pixel" >> $i3File
+	echo ""
+	echo "Removed title bars from windows."
+	echo ""
+fi

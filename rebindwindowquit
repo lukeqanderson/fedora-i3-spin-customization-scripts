@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Script to rebind quit key to MOD+q
+
+
+bindingOption=$1
+file=/home/cookinduck/.config/i3/config
+
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    STARTING I3 QUIT KEYBINDER                                               #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+
+# checks for whether custom user options added to config file
+addi3config
+
+
+if [ "$bindingOption" = "on" ]; then 
+	# checks for if default quit binding is disabled.
+	if grep -q "#bindsym \$mod+Shift+q kill" "$file"; then
+		echo ""
+		echo "Custom \"Quit\" keybinding already set, check \"$file\" for errors (Aborting)."
+		echo ""
+	else 
+		echo ""
+		echo "Switching i3 configuration to custom quit keybinding..."
+		# uncomments out the added custom binding and comments the default binding
+		sed -i '229s/^#//' "$file"
+		sed -i '51s/^/#/' "$file"
+		echo ""
+		echo "I3 configuration switched to custom quit keybindings."
+		echo ""
+	       	echo "Press \"\$mod+Shift+r\" to restart i3."
+		echo ""
+	fi
+elif [ "$bindingOption" = "off" ]; then 
+	# checks for if custom quit binding is disabled.
+	if grep -q "#bindsym \$mod+q kill" "$file"; then
+		
+		echo ""
+		echo "Default \"Quit\" keybinding already set, check \"$file\" for errors (Aborting)."
+		echo ""
+	else 
+		echo ""
+		echo "Returning to default i3 quit keybinding configuration..."
+		# comments out the added vim bindings and comment the default binding
+		sed -i '51s/^#//' "$file"
+		sed -i '229s/^/#/' "$file"
+	fi
+fi 

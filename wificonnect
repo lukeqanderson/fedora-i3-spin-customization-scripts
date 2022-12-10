@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# A script to make changing wifi more user friendly. 
+# This script leverages the "nmcli" tool. 
+
+wifiCount=1
+wifiLog=/usr/local/lib/availableWifiLog.txt
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    STARTING EASY WIFI CONNECT                                               #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+echo "Checking for disabled wifi..."
+# Checks for disabled wifi and enables if it disabled
+if nmcli radio wifi | grep -i "disabled" >> /dev/null ; then
+	echo ""
+	echo "Wifi Status: DOWN"
+	echo ""
+	echo "Enabling wifi..."
+	nmcli radio wifi on
+	if ! nmcli radio wifi | grep -i "enabled" >> /dev/null  ; then 
+		echo ""
+		echo "ERROR: Failed to enable wifi. Please check hardware or network card drivers..."
+		echo ""
+		echo "ABORTED"
+		break
+	fi
+fi
+# Verifies that first check is passed, wifi is enabled.
+echo ""
+echo "Wifi Status: OK"
+
+# Searches for available networks
+echo ""
+echo "Searching for wifi networks..."
+echo ""
+nmcli dev wifi list > $wifiLog 
+echo "Current Wifi connection: $( awk ' $1 == "*" {print $3}' $wifiLog )"
+echo ""
+echo "AVAILABLE NETWORKS"
+echo "----------------------------------------------------------------"
+awk '{if($1 != "*" && $2 != "BSSID") {print ++i": " $2}}' $wifiLog
+echo "----------------------------------------------------------------"
+
+# Reads in network choice from user
+availableWifiCount=$(awk '{if($1 != "*" && $2 != "BSSID") print}' $wifiLog | wc -l)
+networkNumber=0
+declare -i networkNumber
+while ((networkNumber < 1 || networkNumber > availableWifiCount))
+do
+	echo "Select a network by number:"
+	read networkNumber
+done
+
+# Isolates selected SSID and passes it to nmcli to connect 
+selectedSSID=$(awk '{if($1 != "*" && $2 != "BSSID") {print $2}}' $wifiLog | head -n $networkNumber | tail -n 1)
+echo ""
+rm -f $wifiLog
+nmcli --ask dev wifi connect $selectedSSID

@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# script to setup and configure rofi
+
+rofi=$1
+i3File=/home/cookinduck/.config/i3/config
+rofiFile=/home/cookinduck/.config/rofi/config.rasi
+if [ "$rofi" = "on" ] ;then 
+	if grep -q "#bindsym \$mod+d exec --no-startup-id \"dmenu_run" $i3File ;then
+		echo ""
+		echo "rofi already enabled check \"$i3File\" for more details (aborting)."
+		echo ""
+	else 
+		echo ""
+		echo "binding rofi to \$mod+d..."
+		echo ""
+		sed -i '54s/^/#/' "$i3File"
+		sed -i '236s/^#//' "$i3File"
+		echo "done."
+	fi
+	if ls -ltr /home/cookinduck/.config | grep -q "rofi" ;then 
+		echo "Rofi config directory found."
+		echo ""
+	else 
+		echo "Rofi config directory not found creating directory and config file in \"/home/cookinduck/.config\"."
+		echo ""
+		mkdir /home/cookinduck/.config/rofi
+		cp /usr/local/bin/configs/rofi/config.rasi /home/cookinduck/.config/rofi
+		echo "Config file and directory created."
+	fi
+else
+	if grep -q "#bindsym \$mod+d exec --no-startup-id \"rofi" $i3File ;then
+		echo ""
+		echo "default program launcher already enabled check \"$i3File\" for more details (aborting)."
+		echo ""
+	else 
+		echo ""
+		echo "binding dmenu to \$mod+d..."
+		echo ""
+		sed -i '236s/^/#/' "$i3File"
+		sed -i '54s/^#//' "$i3File"
+		echo "done."
+	fi
+fi
