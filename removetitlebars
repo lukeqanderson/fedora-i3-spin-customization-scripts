@@ -9,7 +9,7 @@ if grep -q "new_window" $i3File ;then
 	echo ""
 else
 	echo "" >> $i3File
-	echo "new_window 1pixel" >> $i3File
+	echo "for_window \[class=\"^.*\"\] border pixel 0" >> $i3File
 	echo ""
 	echo "Removed title bars from windows."
 	echo ""

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# script to keybind flameshot to "Print" key
+
+configFile=/home/cookinduck/.config/i3/config
+if grep -q "bindsym --release Print" $configFile ;then 
+	echo ""
+	echo "Keybinding already set. Check \"$configFile\" for details (Aborting)."
+	echo ""
+else 
+	echo "" >> $configFile
+	echo "# set flameshot keybinding" >> $configFile
+	echo "bindsym --release Print exec flameshot gui" >> $configFile
+	echo ""
+	echo "Flameshot set to print key."
+	echo ""
+fi

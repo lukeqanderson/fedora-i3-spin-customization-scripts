@@ -137,6 +137,28 @@ addgaps
 echo ""
 echo "###############################################################################"
 echo "#                                                                             #"
+echo "#    BINDING FLAMESHOT TO PRINT KEY                                           #"
+echo "#                                                                             #"
+echo "#    Executing: /usr/local/bin/setflameshot                                   #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+setflameshot
+
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    CONFIGURING LIGHTDM DISPLAY MANAGER                                      #"
+echo "#                                                                             #"
+echo "#    Executing: /usr/local/bin/configurelightdm                               #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+configurelightdm
+
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
 echo "#    SECURING THE SYSTEM                                                      #"
 echo "#    Executing: /usr/local/bin/securebox                                      #"
 echo "#                                                                             #"

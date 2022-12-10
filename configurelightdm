@@ -1,70 +1,33 @@
 #!/bin/bash
 
-# bash script to toggle default / vim movement keybindings for i3.
+# bash script to configure lightdm.
 
-vimbindings=$1
-file=/home/cookinduck/.config/i3/config
-
-echo ""
-echo "###############################################################################"
-echo "#                                                                             #"
-echo "#    STARTING I3 VIM KEYBINDER                                                #"
-echo "#                                                                             #"
-echo "###############################################################################"
-echo ""
-
-# checks for whether custom user options added to config file
-addi3config
-
-
-if [ "$vimbindings" = "on" ]; then 
-	# checks for if vim bindings are already on by using the unique "semicolon" configuration in the default settings.
-	if grep -q "#bindsym \$mod+semicolon" "$file"; then
-		echo ""
-		echo "Vim keybindings already set, check \"$file\" for errors (Aborting)."
-		echo ""
-	else 
-		echo ""
-		echo "Switching i3 configuration to vim movement keybindings..."
-		# uncomments out the added vim bindings and comment the default binding
-		sed -i '217,220s/^#//' "$file"
-		sed -i '62,65s/^/#/' "$file"
-		sed -i '223,226s/^#//' "$file"
-		sed -i '74,77s/^/#/' "$file"
-		sed -i '86s/^/#/' "$file"
-		sed -i '214s/^#//' "$file"
-		echo ""
-		echo "I3 configuration switched to vim movement keybindings."
-		echo ""
-	       	echo "Press \"\$mod+Shift+r\" to restart i3."
-		echo ""
-	fi
-elif [ "$vimbindings" = "off" ]; then 
-	# checks for if vim bindings are already on by using the unique "h" configuration in the vim settings.
-	if grep -q "#bindsym \$mod+h focus left" "$file"; then
-		
-		echo ""
-		echo "Default keybindings already set, check \"$file\" for errors (Aborting)."
-		echo ""
-	else 
-		echo ""
-		echo "Returning to default i3 movement keybinding configuration..."
-		# comments out the added vim bindings and comment the default binding
-		sed -i '62,65s/^#//' "$file"
-		sed -i '217,220s/^/#/' "$file"
-		sed -i '74,77s/^#//' "$file"
-		sed -i '223,226s/^/#/' "$file"
-		sed -i '214s/^/#/' "$file"
-		sed -i '86s/^#//' "$file"
-		echo ""
-		echo "I3 configuration switched to default movement keybindings." 
-		echo ""
-		echo "Press \"\$mod+Shift+r\" to restart i3."
-		echo ""
-	fi
+configFile=/etc/lightdm/slick-greeter.conf
+picturePath=/home/cookinduck/Pictures
+if ls -ltr $picturePath | grep -q loginPicture ;then 
+	echo ""
+	echo "Login picture directory found. Continuing config..."
+	echo ""
 else
 	echo ""
-	echo "ERROR: Invalid parameter passed. This script accepts \"on\" or \"off\" as valid parameters."
+	echo "Making login picture directory..."
 	echo ""
+	(cd $picturePath; mkdir loginPicture)
 fi
 
+if ls -ltr $picturePath/loginPicture | grep -q picture ;then
+	echo "Picture \"picture\" found. Continuing config..."
+	echo ""
+else 
+	echo "Picture \"picture\" not found. Grabbing default picture..."
+	echo ""
+	echo "NOTE: If you have a picture, ensure it is named \"picture\". Continuing config..."
+	echo ""
+	wget https://i.imgur.com/E7ymJ5Y.png -P $picturePath/loginPicture
+	(cd $picturePath/loginPicture; mv * /home/cookinduck/Pictures/loginPicture/picture)
+fi
+
+echo "Setting login picture..."
+echo ""
+chmod 777 $picturePath/loginPicture/picture
+cp $picturePath/loginPicture/picture /usr/share/backgrounds/f37/default/f37-01-day.png
