@@ -126,6 +126,17 @@ removetitlebars
 echo ""
 echo "###############################################################################"
 echo "#                                                                             #"
+echo "#    ADDING GAPS TO i3 CONFIG                                                 #"
+echo "#                                                                             #"
+echo "#    Executing: /usr/local/bin/addgaps                                        #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+addgaps
+
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
 echo "#    SECURING THE SYSTEM                                                      #"
 echo "#    Executing: /usr/local/bin/securebox                                      #"
 echo "#                                                                             #"

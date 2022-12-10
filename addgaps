@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# script to add gaps to i3 config file
+
+i3File=/home/cookinduck/.config/i3/config
+if grep -q "gaps inner" $i3File ;then
+	echo ""
+	echo "Found gap settings in \"$i3File\" (Aborting)."
+	echo ""
+else 
+	echo "" >> $i3File
+	echo "gaps inner 20" >> $i3File
+	echo "gaps outer 0" >> $i3File
+	echo ""
+	echo "Gaps added to i3 config."
+	echo ""
+fi

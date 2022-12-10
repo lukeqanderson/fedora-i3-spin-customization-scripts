@@ -10,6 +10,18 @@ echo "#                                                                         
 echo "###############################################################################"
 echo ""
 
+# Installs the one true editor v2.
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installing i3 gaps and removing i3...                                    #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf remove -y i3
+dnf copr -y enable fuhrmann/i3-gaps
+dnf install -y i3-gaps
+
 # Updates and upgrade repo
 dnf update -y && dnf upgrade -y
 
@@ -78,7 +90,7 @@ dnf install -y libev-devel libX11-devel libX11-xcb libXext-devel
 dnf install -y libxcb-devel libGL-devel libEGL-devel meson
 dnf install -y pcre2-devel pixman-devel uthash-devel 
 dnf install -y xcb-util-image-devel xcb-util-renderutil-devel xorg-x11-proto-devel
-dnf install -y xcb-util-render-devel
+dnf install -y xcb-util-xrm-devel
 python3 -m pip install asciidoc
 
 echo "Making directory for cloned git repos..."
