@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# script to configure i3lock
+
+if ls -ltr /home/cookinduck/Picture | grep -q loginPicture ;then
+	echo ""
+	echo "Login picture found. Continuing configuration..."
+	echo ""
+else
+	echo ""
+	echo "No login picture found. Running \"configurelightdm\"..."
+	echo ""
+	configurelightdm
+fi
+
+i3File=/home/cookinduck/.config/i3/config
+if grep -q i3lockwall $i3File ;then 
+	echo ""
+	echo "Lock key blinding found (Aborting)."
+	echo ""
+else 
+	echo ""
+	echo "Adding keybinding for lock screen (Mod+Ctrl+Shift+l)."
+	echo ""
+	echo "" >> $i3File
+	echo "# i3 lock config files" >> $i3File
+	echo "set \$i3lockwall i3lock -i /usr/share/backgrounds/f37/default/f37-01-day.png -t" >> $i3File
+	echo "bindsym \$mod+Ctrl+Shift+l exec --no-startup-id \$i3lockwall" >> $i3File
+fi	
