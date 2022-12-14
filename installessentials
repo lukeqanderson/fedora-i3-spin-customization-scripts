@@ -10,7 +10,37 @@ echo "#                                                                         
 echo "###############################################################################"
 echo ""
 
-# Installs the one true editor v2.
+# Removes mousepad
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Uninstalls Mousepad...                                                   #" 
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf remove -y mousepad
+
+# Removes azote 
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Uninstalls Azote (Wallpaper manager)...                                  #" 
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf remove -y azote
+
+# Removes disks
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Uninstalls Disks...                                                      #" 
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf remove -y gnome-disk-utility
+
+# Installs i3gaps.
 echo ""
 echo "###############################################################################"
 echo "#                                                                             #"
@@ -51,6 +81,7 @@ echo "##########################################################################
 echo "#                                                                             #"
 echo "#    Installing alacritty terminal emulator with dependencies...              #"
 echo "#                                                                             #"
+
 echo "###############################################################################"
 echo ""
 dnf install -y cmake freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel g++
@@ -126,3 +157,148 @@ echo "#                                                                         
 echo "###############################################################################"
 echo ""
 dnf install -y scrot
+
+# Installs openVPN.
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installing openVPN...                                                    #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install -y openvpn
+
+# Installs openSSL.
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installing openSSL...                                                    #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install -y openssl
+
+# Installs openresolv.
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installing openresolv...                                                 #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install -y openresolv
+
+# Installs libnsl
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installing libnsl/libnsl2...                                             #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install -y libnsl
+dnf install -y libnsl2-devel
+
+# Installs RPM Fusion
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installing RPM Fusion repository...                                      #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+# Installs Flatpack
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installing Flatpack...                                                   #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install -y flatpak
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# Installs Discord
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installs Discord (from dnf)...                                        #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf update
+dnf install -y discord
+
+# Installs ranger File Manager
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installs ranger File Manager...                                            #" 
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf remove -y thunar
+if ls -ltr /home/cookinduck/.config | grep -q "Thunar" ; then
+	rm -rf /home/cookinduck/.config/Thunar
+fi
+dnf install -y ranger
+
+# Installs neofetch 
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installs neofetch...                                                     #" 
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install -y neofetch
+
+# Installs node
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installs Node.js...                                                      #" 
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install -y nodejs
+
+# Installs xsel 
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installs xsel...                                                         #" 
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install -y xsel
+
+# Installs ripgrep
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installs ripgrep...                                                      #" 
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install -y ripgrep
+
+# Installs pip3 
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installs pip3...                                                         #" 
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+dnf install -y python3-pip
+
+# Installs neovim support packages
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    Installs nvim support (python / node)...                                 #" 
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+pip install pynvim
+npm i -g neovim
+

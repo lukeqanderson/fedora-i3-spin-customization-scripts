@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Script to set up configs for NeoVim
+
+configPath=/home/cookinduck/.config
+if ls -ltr $configPath | grep -q nvim ;then 
+	echo ""
+	echo "Found \"nvim\" directory in \"$configPath\". Continuing config..."
+	echo ""
+else 
+	echo ""
+	echo "No \"nvim\" directory in \"$configPath\". Creating directory..."
+	echo ""
+	mkdir $configPath/nvim
+fi
+
+if ls -ltdr $configPath/nvim | grep -q lua ;then 
+	echo ""
+	echo "Found \"lua\" directory in \"$configPath/nvim\". Continuing config..."
+	echo ""
+else 
+	echo ""
+	echo "No \"lua\" directory in \"$configPath/nvim\". Creating directory..."
+	echo ""
+	mkdir $configPath/nvim/lua
+fi
+
+
+sourceFile=/usr/local/bin/configs/nvim/init.lua
+
+cp $sourceFile $configPath/nvim/

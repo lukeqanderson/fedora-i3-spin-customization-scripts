@@ -159,6 +159,28 @@ configurelightdm
 echo ""
 echo "###############################################################################"
 echo "#                                                                             #"
+echo "#    CONFIGURING VIM RESIZING KEYS                                            #"
+echo "#                                                                             #"
+echo "#    Executing: /usr/local/bin/vimresizekeys                                  #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+vimresizekeys on
+
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    CONFIGURING DEFAULT TERMINAL FOR APPS                                    #"
+echo "#                                                                             #"
+echo "#    Executing: /usr/local/bin/setapplicationterminal                         #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+setapplicationterminal
+
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
 echo "#    SECURING THE SYSTEM                                                      #"
 echo "#    Executing: /usr/local/bin/securebox                                      #"
 echo "#                                                                             #"

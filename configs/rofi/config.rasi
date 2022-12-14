@@ -11,7 +11,7 @@
     dark: #1c1c1c;
     // Black
     black:       #32323f;
-    lightblack:  #64647d;
+    lightblack:  #0167d3;
     tlightblack:  #554444cc;
     //
     // Red
@@ -44,11 +44,11 @@
     lightwhite:     #ffffff;
     //
     // Bold, Italic, Underline
-    highlight:     underline bold #ffffff;
+    highlight:     bold #ffffff;
 
     transparent: rgba(0,0,0,0);
     transparent2: rgba(50,50,63,1);
-    font: "Source Code Pro 10";
+    font: "Liberation Mono 14";
 }
 window {
     location: center;
@@ -66,7 +66,8 @@ window {
 mainbox {
     spacing: 0;
     background-color: @transparent2;
-    border: 0px;
+    border: 5px;
+    border-color: @lightblack;
     border-radius:  15px 15px 15px 15px;
     children: [ inputbar, message, listview ];
 }

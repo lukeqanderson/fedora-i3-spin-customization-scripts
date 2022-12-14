@@ -9,7 +9,6 @@ mkdir -p /home/cookinduck/.config/polybar
 polybarConfig=/etc/polybar/config.ini
 origConfig=/usr/local/bin/original-configs/polybar/config.ini.orig
 i3Config=/home/cookinduck/.config/i3/config
-
 # Replaces current polybar config with original
  cat $origConfig > $polybarConfig
 
@@ -49,12 +48,13 @@ fi
 	
 
 # Makes adjustements to polybar config file
+sed -i 's/font-0 = monospace;2/font-0 = Liberation Mono:style=bold:size=12;2/' $polybarConfig
 sed -i 's/height = 27pt/height = 22pt/' $polybarConfig
 sed -i 's/background = #282A2E/background = #32323f/' $polybarConfig
-sed -i 's/background-alt = #373B41/background-alt = #48485f/' $polybarConfig
-sed -i 's/foreground = #C5C8C6/foreground = #dfdfdf/' $polybarConfig
-sed -i 's/primary = #F0C674/primary = #8790b4/' $polybarConfig
-sed -i 's/secondary = #8ABEB7/secondary = #90fffc/' $polybarConfig
+sed -i 's/background-alt = #373B41/background-alt = #0167d3/' $polybarConfig
+sed -i 's/foreground = #C5C8C6/foreground = #ffffff/' $polybarConfig
+sed -i 's/primary = #F0C674/primary = #459fff/' $polybarConfig
+sed -i 's/secondary = #8ABEB7/secondary = #459fff/' $polybarConfig
 sed -i 's/alert = #A54242/alert = #f3407a/' $polybarConfig
 sed -i 's/disabled = #707880/disabled = #8ca7b8/' $polybarConfig
 sed -i 's/radius = 6/radius = 9/' $polybarConfig
@@ -64,12 +64,12 @@ sed -i 's/separator = |/separator =/' $polybarConfig
 sed -i 's/modules-right = filesystem pulseaudio xkeyboard memory cpu wlan eth date/modules-right = memory cpu wlan eth battery/' $polybarConfig
 sed -i 's/modules-left = xworkspaces xwindow/modules-left = xworkspaces xwindow filesystem/' $polybarConfig
 sed -i "s/modules-right = memory cpu wlan eth battery/modules-right = memory cpu wlan eth battery\nmodules-center = date/" $polybarConfig
-sed -i 's/F0C674/8790b4/' $polybarConfig
+sed -i 's/F0C674/459fff/' $polybarConfig
 sed -i 's/%local_ip%//' $polybarConfig
 sed -i 's/date = %H:%M/date = %m-%d-%y    %H:%M:%S/' $polybarConfig
 sed -i 's/label-foreground = ${colors.primary}/label-foreground = ${colors.foreground}/' $polybarConfig;
 sed -i '103,125s/^/;/' $polybarConfig
-sed -i "s/label-empty-padding = 1/label-empty-padding = 1\n\n[module\/battery]\ntype = internal\/battery\nfull-at = 99\nlow-at = 5\nbattery = BAT1\napapter = ACAD\npoll-interval = 5/" $polybarConfig
+sed -i "s/label-empty-padding = 1/label-empty-padding = 1\n\n[module\/battery]\ntype = internal\/battery\nfull-at = 99\nlow-at = 0\nbattery = BAT1\napapter = ACAD\npoll-interval = 5\nlabel-charging = %{F#459fff}CHARGING%{F-} %percentage%%\nlabel-discharging = %{F#459fff}BATTERY %{F-} %percentage%%\nlabel-full = %{F#459fff}BATTERY %{F-} %percentage%%/" $polybarConfig
 
 echo "Polybar fully configured. Restart system to see changes."
 echo ""

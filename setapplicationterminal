@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# program to set default terminal to alacritty for terminal based apps
+
+appDir=/usr/share/applications/*
+
+for file in $appDir
+do
+	if grep -q 'Terminal=true' $file ;then
+		echo ""
+		echo "Setting alacritty as default terminal for \"$file"\"
+		sed -i 's/Exec=/Exec=alacritty -e /' $file
+		sed -i 's/Terminal=true/Terminal=false/' $file
+	fi
+done

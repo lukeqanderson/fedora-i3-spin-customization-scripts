@@ -7,11 +7,11 @@ STEP 2: Ensure i3 is installed on Fedora with automatically added config files.
 
 STEP 3: Add all script and files to the /usr/local/bin directory.
 
-STEP 4: Install the Cyberghostvpn CLI client from "https://my.cyberghostvpn.com/en_US/login".
+STEP 4: Run "fullconfig" script. 
 
-STEP 5: Run "fullconfig" script. 
+STEP 5: Press "MOD+SHIFT+r" to reset i3 keybindings.
 
-STEP 6: Press "MOD+SHIFT+r" to reset i3 keybindings.
+STEP 6: Install Nullvad VPN 
 
 STEP 7: Restart system.
 

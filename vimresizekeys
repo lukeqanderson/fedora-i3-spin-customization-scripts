@@ -1,0 +1,96 @@
+#!/bin/bash
+
+# bash script to toggle default / vim movement keybindings for i3.
+
+vimbindings=$1
+file=/home/cookinduck/.config/i3/config
+
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    STARTING I3 VIM MOVEMENT KEYBINDER                                       #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+
+# checks if vim movement keys are added
+if grep -q "# vim resize window keys" $file ;then 
+	echo ""
+	echo "Vim resize keys already added."
+	echo ""
+else
+	echo ""
+	echo "Adding resize keys to config file."
+	echo ""
+	echo "" >> $file
+	echo "# vim resize window keys" >> $file
+	echo "#mode \"resize\" {" >> $file
+	echo "#	bindsym h resize shrink width 5px or 5ppt" >> $file
+	echo "#	bindsym j resize grow height 5px or 5ppt" >> $file
+	echo "#	bindsym k resize shrink height 5px or 5ppt" >> $file
+	echo "#	bindsym l resize grow width 5px or 5ppt" >> $file
+	echo "" >> $file
+	echo "#	bindsym Left resize shrink width 5px or 5ppt" >> $file
+	echo "#	bindsym Down resize grow height 5px or 5ppt" >> $file
+	echo "#	bindsym Up resize shrink heigth 5px or 5ppt" >> $file
+	echo "#	bindsym Right resize grow width 5px or 5ppt" >> $file
+	echo "" >> $file
+	echo "#	bindsym Return mode \"default\"" >> $file
+	echo "#	bindsym Escape mode \"default\"" >> $file
+	echo "#	bindsym \$mod+r mode \"default\"" >> $file
+	echo "#}" >> $file
+fi
+
+if [ "$vimbindings" = "on" ]; then 
+	# checks for if vim bindings are already on by using the unique "semicolon" configuration in the default settings.
+	if grep -q "#	bindsym semicolon resize" "$file"; then
+		echo ""
+		echo "Vim keybindings already set, check \"$file\" for errors (Aborting)."
+		echo ""
+	else 
+		echo ""
+		echo "Switching i3 configuration to vim movement keybindings..."
+		# uncomments out the added vim bindings and comment the default binding
+		sed -i '255,259s/^#//' "$file"
+		sed -i '261,264s/^#//' "$file"
+		sed -i '266,269s/^#//' "$file"
+		sed -i '156s/^/#/' "$file"
+		sed -i '163,166s/^/#/' "$file"
+		sed -i '169,172s/^/#/' "$file"
+		sed -i '175,178s/^/#/' "$file"
+		echo ""
+		echo "I3 configuration switched to vim movement keybindings."
+		echo ""
+	       	echo "Press \"\$mod+Shift+r\" to restart i3."
+		echo ""
+	fi
+elif [ "$vimbindings" = "off" ]; then 
+	# checks for if vim bindings are already on by using the unique "h" configuration in the vim settings.
+	if grep -q "#	bindsym h resize" "$file"; then
+		
+		echo ""
+		echo "Default keybindings already set, check \"$file\" for errors (Aborting)."
+		echo ""
+	else 
+		echo ""
+		echo "Returning to default i3 movement keybinding configuration..."
+		# comments out the added vim bindings and comment the default binding
+		sed -i '255,259s/^/#/' "$file"
+		sed -i '261,264s/^/#/' "$file"
+		sed -i '266,269s/^/#/' "$file"
+		sed -i '156s/^#//' "$file"
+		sed -i '163,166s/^#//' "$file"
+		sed -i '169,172s/^#//' "$file"
+		sed -i '175,178s/^#//' "$file"
+		echo ""
+		echo "I3 configuration switched to default movement keybindings." 
+		echo ""
+		echo "Press \"\$mod+Shift+r\" to restart i3."
+		echo ""
+	fi
+else
+	echo ""
+	echo "ERROR: Invalid parameter passed. This script accepts \"on\" or \"off\" as valid parameters."
+	echo ""
+fi
+
