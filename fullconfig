@@ -77,6 +77,50 @@ vimkeybindings on
 customterminal on
 rebindwindowquit on
 
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    ADD PICOM                                                                #"
+echo "#                                                                             #"
+echo "#    Executing: /usr/local/bin/addpicom                                       #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+addpicom
+
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    ADDING GAPS TO i3 CONFIG                                                 #"
+echo "#                                                                             #"
+echo "#    Executing: /usr/local/bin/addgaps                                        #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+addgaps
+
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    BINDING FLAMESHOT TO PRINT KEY                                           #"
+echo "#                                                                             #"
+echo "#    Executing: /usr/local/bin/setflameshot                                   #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+setflameshot
+
+echo ""
+echo "###############################################################################"
+echo "#                                                                             #"
+echo "#    CONFIGURING I3LOCK                                                       #"
+echo "#                                                                             #"
+echo "#    Executing: /usr/local/bin/configurei3lock                                #"
+echo "#                                                                             #"
+echo "###############################################################################"
+echo ""
+configurei3lock
+
 # Configure polybar.
 echo ""
 echo "###############################################################################"
@@ -126,28 +170,6 @@ removetitlebars
 echo ""
 echo "###############################################################################"
 echo "#                                                                             #"
-echo "#    ADDING GAPS TO i3 CONFIG                                                 #"
-echo "#                                                                             #"
-echo "#    Executing: /usr/local/bin/addgaps                                        #"
-echo "#                                                                             #"
-echo "###############################################################################"
-echo ""
-addgaps
-
-echo ""
-echo "###############################################################################"
-echo "#                                                                             #"
-echo "#    BINDING FLAMESHOT TO PRINT KEY                                           #"
-echo "#                                                                             #"
-echo "#    Executing: /usr/local/bin/setflameshot                                   #"
-echo "#                                                                             #"
-echo "###############################################################################"
-echo ""
-setflameshot
-
-echo ""
-echo "###############################################################################"
-echo "#                                                                             #"
 echo "#    CONFIGURING LIGHTDM DISPLAY MANAGER                                      #"
 echo "#                                                                             #"
 echo "#    Executing: /usr/local/bin/configurelightdm                               #"
@@ -166,28 +188,6 @@ echo "#                                                                         
 echo "###############################################################################"
 echo ""
 vimresizekeys on
-
-echo ""
-echo "###############################################################################"
-echo "#                                                                             #"
-echo "#    ADD PICOM                                                                #"
-echo "#                                                                             #"
-echo "#    Executing: /usr/local/bin/addpicom                                       #"
-echo "#                                                                             #"
-echo "###############################################################################"
-echo ""
-addpicom
-
-echo ""
-echo "###############################################################################"
-echo "#                                                                             #"
-echo "#    CONFIGURING I3LOCK                                                       #"
-echo "#                                                                             #"
-echo "#    Executing: /usr/local/bin/configurei3lock                                #"
-echo "#                                                                             #"
-echo "###############################################################################"
-echo ""
-configurei3lock
 
 echo ""
 echo "###############################################################################"
