@@ -59,7 +59,8 @@ echo "#                                                                         
 echo "#    Executing: /usr/local/sbin/removegrubtime                                #"
 echo "#                                                                             #"
 echo "###############################################################################"
-echo "" removegrubtime
+echo "" 
+removegrubtime
 
 # Adjusting Key Bindings.
 echo ""

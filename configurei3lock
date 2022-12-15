@@ -2,7 +2,7 @@
 
 # script to configure i3lock
 
-if ls -ltr /home/cookinduck/Picture | grep -q loginPicture ;then
+if ls -ltr /home/cookinduck/Pictures | grep -q loginPicture ;then
 	echo ""
 	echo "Login picture found. Continuing configuration..."
 	echo ""
